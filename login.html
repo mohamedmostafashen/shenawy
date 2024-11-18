@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <title>تسجيل الدخول - محمد مصطفى</title>
+    <style>
+        .popup-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            z-index: 9999;
+        }
+
+        .popup-message h2 {
+            color: #007BFF;
+            font-size: 20px;
+        }
+
+        .popup-message button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .popup-message button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">محمد مصطفى</a>
+        <nav class="navigation"></nav>
+        <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <main>
+        <section class="login-container" id="loginSection">
+            <h2>تسجيل الدخول</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" name="username" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+                </div>
+                <button type="submit" class="main-btn">دخول</button>
+            </form>
+            <div class="login-footer">
+                <p>ليس لديك حساب؟ <a href="signup.html" id="signupLink">إنشاء حساب جديد</a></p>
+            </div>
+        </section>
+
+        <div id="popupMessage" class="popup-message">
+            <h2>تم تسجيل الدخول بنجاح! سيتم تحويلك...</h2>
+            <button onclick="closePopup()">إغلاق</button>
+        </div>
+
+        <div id="expiredMessage" class="popup-message" style="display:none;">
+            <h2>تم انتهاء صلاحية حسابك. يرجى تسجيل الدخول مرة أخرى.</h2>
+            <button onclick="redirectToLogin()">حسنًا</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-title">
+            تم تطوير الموقع بواسطة
+            <span><a href="https://www.facebook.com/profile.php?id=100090831465254">محمد مصطفى (الشناوي)</a></span>
+            جميع الحقوق محفوظة لمحمد مصطفى 2025
+        </p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const expiryDate = new Date('2024-12-18T21:40:00');
+            const currentTime = new Date().getTime();
+            const expiryTime = expiryDate.getTime();
+
+            // التحقق من صلاحية الحساب
+            if (currentTime > expiryTime) {
+                showExpiredMessage("تم انتهاء صلاحية حسابك. يرجى تسجيل الدخول مرة أخرى.");
+            } else {
+                // التحقق من البيانات المدخلة
+                if (username === "mohamedmostafaabas1" && password === "01014708433") {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('loginTime', new Date().getTime());
+                    showPopupMessage("تم تسجيل الدخول بنجاح! سيتم تحويلك...");
+                    setTimeout(function() {
+                        window.location.href = "باقة ال3 شهور.html";
+                    }, 3000);
+                } else if (username === "mohamedmostafaabas1" && password === "01014708434") {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('loginTime', new Date().getTime());
+                    showPopupMessage("تم تسجيل الدخول بنجاح! سيتم تحويلك...");
+                    setTimeout(function() {
+                        window.location.href = "باقة ال1 شهر.html";
+                    }, 3000);
+                } else if (username === "mohamedmostafaabas2" && password === "01014708435") {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('loginTime', new Date().getTime());
+                    showPopupMessage("تم تسجيل الدخول بنجاح! سيتم تحويلك...");
+                    setTimeout(function() {
+                        window.location.href = "باقة ال6 شهور.html";
+                    }, 3000);
+                } else {
+                    showExpiredMessage("البيانات المدخلة خاطئة");
+                }
+            }
+        });
+
+        // عرض رسالة النجاح
+        function showPopupMessage(message) {
+            document.getElementById('popupMessage').style.display = 'block';
+            document.getElementById('popupMessageText').innerText = message;
+        }
+
+        // عرض رسالة انتهاء صلاحية الحساب
+        function showExpiredMessage(message) {
+            document.getElementById('popupMessage').style.display = 'none'; // إخفاء رسالة النجاح
+            const expiredMessageDiv = document.getElementById('expiredMessage');
+            expiredMessageDiv.style.display = 'block';
+            expiredMessageDiv.querySelector('h2').innerText = message;
+        }
+
+        // إغلاق رسالة النجاح
+        function closePopup() {
+            document.getElementById('popupMessage').style.display = 'none';
+        }
+
+        // إعادة التوجيه إلى صفحة تسجيل الدخول
+        function redirectToLogin() {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
